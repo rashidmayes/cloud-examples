@@ -1,1 +1,0 @@
-echo '@!Pw0rd' | sudo -S yum -y install httpd && echo '@!Pw0rd' | sudo -S systemctl start httpd
