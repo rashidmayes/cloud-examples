@@ -14,15 +14,15 @@ public class AzureUserData {
 	public static void main(String[] args) {
 
 		try {
+			
+			final File credFile = new File(System.getProperty("user.home"), ".azure/azure");
 
-			final File credFile = new File(System.getProperty("user.home"),".azure/azure");
+			Azure azure = Azure.configure()
+					.withLogLevel(LogLevel.BODY_AND_HEADERS)
+					.authenticate(credFile)
+					.withDefaultSubscription();
 
-	        Azure azure = Azure.configure()
-	                .withLogLevel(LogLevel.BODY_AND_HEADERS)
-	                .authenticate(credFile)
-	                .withDefaultSubscription();
-
-			String userData = "python web_server.py &";		
+			String userData = "python web_server.py &";
 
 		    VirtualMachine linuxVM = azure.virtualMachines().define("myVM")
 					.withRegion(Region.US_EAST2)
